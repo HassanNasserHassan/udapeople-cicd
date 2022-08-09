@@ -69,7 +69,7 @@ jobs:
 
   test-frontend:
     docker:
-      cimg/node:13.8.0
+      - image: cimg/node:13.8.0
     steps:
       - checkout
       - restore_cache:
@@ -81,19 +81,19 @@ jobs:
              npm install
              npm test
                 
-  # test-backend:
-  #   docker:
-  #     cimg/node:13.8.0
-  #   steps:
-  #     - checkout
-  #     - restore_cache:
-  #         keys: [backend-deps]
-  #     - run:
-  #         name: Back-end Unit Test
-  #         command: |
-  #            cd backend
-  #            npm install
-  #            npm test
+  test-backend:
+    docker:
+      - image: cimg/node:13.8.0
+    steps:
+      - checkout
+      - restore_cache:
+          keys: [backend-deps]
+      - run:
+          name: Back-end Unit Test
+          command: |
+             cd backend
+             npm install
+             npm test
             
 #   scan-frontend:
 #     docker:
@@ -284,8 +284,8 @@ workflows:
       - build-backend
       - test-frontend:
           requires: [build-frontend]
-      # - test-backend:
-      #     requires: [build-backend]
+      - test-backend:
+          requires: [build-backend]
       # - scan-backend:
       #     requires: [build-backend]
       # - scan-frontend:

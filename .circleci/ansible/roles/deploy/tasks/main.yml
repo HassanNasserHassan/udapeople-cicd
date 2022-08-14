@@ -13,7 +13,8 @@
 
 - name: "install nodejs"
   apt:
-    install nodejs
+    name: nodejs
+    state: present
     
 - name: "Install PM2 Globally"
   npm:

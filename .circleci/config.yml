@@ -294,17 +294,13 @@ jobs:
       - restore_cache:
           keys: [backend-deps]
       - run:
-          name: Install dependencies
-          command: |
-            cd backend
-            npm install
-      - run:
           name: Deploy backend
           command: |
             cd backend
+            npm install
             npm run build
-            tar -czvf artifact.tar.gz dist/* package*
             cd ..
+            tar -C backend -czvf artifact.tar.gz .
             cp ./artifact.tar.gz .circleci/ansible/roles/deploy/files
             cd .circleci/ansible
             cat inventory.txt

@@ -33,11 +33,6 @@
     src: artifact.tar.gz
     dest: ~/backend-app
 
-- name: "Installing node dependencies"
-  shell: |
-    cd ~/backend-app
-    npm i
-
 - name: "Excute node app and PM2"
   args:
     chdir: ~/backend/dist

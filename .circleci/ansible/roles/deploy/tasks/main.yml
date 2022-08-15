@@ -25,17 +25,17 @@
 
 - name: "Backend app dir creation"
   file:
-    path: ~/backend-app
+    path: /home/ubuntu/backend-app
     state: directory
 
 - name: "Decompress backend files"
   unarchive:
     src: artifact.tar.gz
-    dest: ~/backend-app
+    dest: /home/ubuntu/backend-app
 
 - name: "Excute node app and PM2"
   args:
-    chdir: ~/backend-app/dist
+    chdir: /home/ubuntu/backend-app/dist
   environment:
       ENVIRONMENT: production
       TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION') }}"
